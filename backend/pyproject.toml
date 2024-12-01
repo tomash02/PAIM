@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = "Backend for PAIM project APP"
+authors = ["Wiktor Frątczak <01171649@pw.edu.pl>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "*.py"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.5"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+flake8 = "^7.1.1"
+pre-commit = "^4.0.1"
+black = "^24.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
