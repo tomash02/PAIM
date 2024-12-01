@@ -9,10 +9,6 @@
 ### Development
 1. Run `pre-commit install` to install the [pre-commit](https://pre-commit.com/) hooks.
 ```shell
-curl 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]' \
--H 'Content-Type: application/json' \
---data-binary '{"email":"[user@example.com]","password":"[PASSWORD]","returnSecureToken":true}'
-```
 
 ### Testing
 Tests are divided into unit and integration. Use `pytest` to run tests both test types, `pytest tests/test_unit` to run
