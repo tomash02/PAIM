@@ -17,4 +17,4 @@ starting the database is required - execute `./scripts/initdb.sh` to do so.
 
 ## Running
 1. Execute `cd backend`
-1. Execute `fastapi dev infrastructure/api/main.py` to start the server.
+2. Execute `fastapi dev infrastructure/api/main.py` to start the server.
