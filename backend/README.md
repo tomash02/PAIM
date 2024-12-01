@@ -8,7 +8,6 @@
 
 ### Development
 1. Run `pre-commit install` to install the [pre-commit](https://pre-commit.com/) hooks.
-```shell
 
 ### Testing
 Tests are divided into unit and integration. Use `pytest` to run tests both test types, `pytest tests/test_unit` to run
