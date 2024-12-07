@@ -17,7 +17,7 @@ const RegisterForm = () => {
     event.preventDefault();
 
     // Walidacja
-    if (!email || !password || !company_name || !nip) {
+    if (!email || !password || !company_name || !nip || !payment_address || !delivery_address) {
       setError("Proszę wypełnić wszystkie pola");
       return;
     }
@@ -33,6 +33,8 @@ const RegisterForm = () => {
       password,
       company_name,
     };
+
+    console.log("Form data to be sent:", newClient);
 
     try {
       await addClient(newClient);
@@ -68,7 +70,10 @@ const RegisterForm = () => {
           fullWidth
           margin="normal"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            console.log("Email: " + e.target.value);
+            setEmail(e.target.value);
+          }}
         />
 
         <TextField
@@ -123,7 +128,7 @@ const RegisterForm = () => {
           </Typography>
         )}
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button type="submit" variant="contained" color="primary" fullWidth onChange={(e) => setOrders("zamowienie")}>
           Zarejestruj się
         </Button>
       </form>

@@ -1,27 +1,50 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, Form
+from fastapi import APIRouter, HTTPException, Request
+from pydantic import BaseModel
 from infrastructure.mongo.client_handler import register_client, get_client
 
+class Client(BaseModel):
+    email: str
+    payment_address: str
+    delivery_address: str
+    nip: str
+    orders: str
+    password: str
+    company_name: str
 
 router = APIRouter()
 
 @router.post("/register")
-async def upload_client_endpoint(
-    email: str = Form(...),
-    payment_address: str = Form(...),
-    delivery_address: str = Form(...),
-    nip: str = Form(...),
-    orders: str = Form(...),
-    password: str = Form(...),
-    company_name: str = Form(...),
-):
+async def upload_client_endpoint(client_data: Client, request: Request):
+    if request.headers.get("Content-Type") != "application/json":
+        raise HTTPException(status_code=400, detail="Content-Type must be application/json")
+    
     try:
-        
-        client_id = register_client(email, payment_address, delivery_address, nip, orders, password, company_name)
-        
-        return {"info": f"Client '{email}' registered successfully", "client_id": client_id}
+        client_id = register_client(
+            client_data.email,
+            client_data.payment_address,
+            client_data.delivery_address,
+            client_data.nip,
+            client_data.orders,
+            client_data.password,
+            client_data.company_name
+        )
+
+        return {
+            "info": f"Client '{client_data.email}' registered successfully",
+            "client_id": client_id,
+            "email": client_data.email,
+            "payment_address": client_data.payment_address,
+            "delivery_address": client_data.delivery_address,
+            "nip": client_data.nip,
+            "orders": client_data.orders,
+            "password": client_data.password,
+            "company_name": client_data.company_name,
+        }
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+
 @router.get("/clients/{client_id}")
 async def get_client_endpoint(client_id: str):
     try:
