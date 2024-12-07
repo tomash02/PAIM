@@ -11,8 +11,12 @@ interface Product {
   expiry_date: string;
 }
 
+interface ProductResponse {
+  product?: Product;
+}
+
 const fetchProducts = async (): Promise<Product[]> => {
-  const response = await axios.get(
+  const response = await axios.get<ProductResponse>(
     "http://localhost:8000/api/products/67537e67b1e1ea00565c6e43",
   );
   return response.data.product ? [response.data.product] : [];

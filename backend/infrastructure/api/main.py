@@ -1,6 +1,7 @@
 # api/main.py
 from fastapi import FastAPI
 from infrastructure.api.endpoints.product import router as product_router
+from infrastructure.api.endpoints.client import router as client_router
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -19,3 +20,4 @@ app.add_middleware(
 )
 
 app.include_router(product_router, prefix="/api", tags=["products"])
+app.include_router(client_router, prefix="/api", tags=["clients"])
