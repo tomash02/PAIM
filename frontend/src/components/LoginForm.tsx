@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -19,11 +22,12 @@ const LoginForm = () => {
     console.log("Zalogowano:", { email, password });
   };
 
+  const handleRegisterRedirect = () => {
+    navigate("/register");
+  };
+
   return (
     <Container>
-      <Typography variant="h5" gutterBottom>
-        Zaloguj się
-      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           label="Email"
@@ -51,6 +55,9 @@ const LoginForm = () => {
           Zaloguj się
         </Button>
       </form>
+      <Button type="submit" variant="contained" color="primary" fullWidth sx={{ marginTop: "16px" }} onClick={handleRegisterRedirect}>
+        Zarejestruj się
+      </Button> 
     </Container>
   );
 };
