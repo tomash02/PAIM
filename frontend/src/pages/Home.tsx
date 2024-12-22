@@ -41,8 +41,8 @@ const ProductsList: React.FC = () => {
         <List>
           {categories.map((category) => (
             <ListItem
-              button
               key={category}
+              component="div"
               sx={{
                 padding: "8px 0",
                 backgroundColor: "transparent",
